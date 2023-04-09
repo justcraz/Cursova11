@@ -1,0 +1,82 @@
+﻿@model PharmaKursWork.ViewModels.UnitViewModels.UnitViewModel;
+
+<div class="text-center">
+    <!-- Button trigger modal -->
+    <button type="button"
+            class="btn btn-primary ks-addbutton rounded-circle d-flex p-3"
+            data-action="@Url.Action("AddUnit", "Unit")">
+
+        <img style="width: 40px; height: 40px" src="icons/plus.svg" />
+    </button>
+
+    <div class="modal-contaier">
+    </div>
+
+    @if (Model.List.Count > 0)
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>@Html.DisplayNameFor(_ => Model.Name)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.Desc)</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var unit in Model.List)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            <button class="ks-tablebuttons editButton" data-action="@Url.Action("EditUnit", "Unit", new { id = unit.Id })"><img src="icons/pencil-square.svg" /></button>
+                            <a class="ks-tablebuttons deleteButton" asp-action="Delete" asp-controller="Unit" asp-route-id="@unit.Id"><img src="icons/trash3-fill.svg" /></a>
+                        </td>
+                        <td class="align-middle">@unit.Name</td>
+                        <td class="align-middle">@unit.Desc</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    } 
+    else
+    {
+        <div class="d-flex justify-content-center"><h3>Данних немає</h3></div>
+    }
+</div>
+
+<script>
+    $(function () {
+        const addButtons = document.querySelectorAll(".ks-addbutton");
+
+        const deleteButtons = document.querySelectorAll(".deleteButton");
+        deleteButtons.forEach((button, index) => {
+            if ((index + 1) % 2 === 0) {
+                button.classList.add("ks-wbg");
+            }
+        })
+
+        const editButtons = document.querySelectorAll(".editButton");
+        editButtons.forEach((button, index) => {
+            if ((index + 1) % 2 === 0) {
+                button.classList.add("ks-wbg");
+            }
+        });
+
+        $(editButtons).on('click', (event) => {
+            event.preventDefault();
+            $.get($(event.currentTarget).data("action"), (resp) => {
+                $(".modal-contaier").html(resp);
+                $('#idi').modal('show');
+            })
+        });
+
+        $(addButtons).on('click', (event) => {
+            event.preventDefault();
+            $.get($(event.currentTarget).data("action"), (resp) => {
+                $(".modal-contaier").html(resp);
+                $('#idi').modal('show');
+            })
+        });
+    });
+</script>

@@ -1,0 +1,77 @@
+﻿@model PharmaKursWork.ViewModels.LaboratoriesViewModels.LaboratoriesViewModel;
+
+<div class="text-center">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary ks-addbutton rounded-circle d-flex p-3" data-action="@Url.Action("AddLab", "Laboratories")" >
+        <img style="width: 40px; height: 40px" src="icons/plus.svg" />
+    </button>
+    <!-- Modal -->
+    <div class="modal-contaier">
+
+    </div>
+    @if (Model.List.Count > 0)
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>@Html.DisplayNameFor(_ => Model.Name)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.Adress)</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var lab in Model.List)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            <button class="ks-tablebuttons editButton" data-action="@Url.Action("EditLab", "Laboratories", new { id = lab.Id })"><img src="icons/pencil-square.svg" /></button>
+                            <a class="ks-tablebuttons deleteButton" asp-action="Delete" asp-controller="Laboratories" asp-route-id="@lab.Id"><img src="icons/trash3-fill.svg" /></a>
+                        </td>
+                        <td class="align-middle">@lab.Name</td>
+                        <td class="align-middle">@lab.Adress</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="d-flex justify-content-center"><h3>Данних немає</h3></div>
+    }
+</div>
+
+<script>
+    $(function () {
+        const addButtons = document.querySelectorAll(".ks-addbutton");
+
+        const deleteButtons = document.querySelectorAll(".deleteButton");
+        deleteButtons.forEach((button, index) => {
+            if ((index + 1) % 2 === 0) {
+                button.classList.add("ks-wbg");
+            }
+        })
+
+        const editButtons = document.querySelectorAll(".editButton");
+        editButtons.forEach((button, index) => {
+            if ((index + 1) % 2 === 0) {
+                button.classList.add("ks-wbg");
+            }
+        });
+
+        $(editButtons).on('click', (event) => {
+            event.preventDefault();
+            $.get($(event.currentTarget).data("action"), (resp) => {
+                $(".modal-contaier").html(resp);
+                $('#idi').modal('show');
+            })
+        });
+        
+        $(addButtons).on('click', (event) => {
+            event.preventDefault();
+            $.get($(event.currentTarget).data("action"), (resp) => {
+                $(".modal-contaier").html(resp);
+                $('#idi').modal('show');
+            })
+        });
+    });
+</script>

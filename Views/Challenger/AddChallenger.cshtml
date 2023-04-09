@@ -1,0 +1,45 @@
+﻿@model PharmaKursWork.ViewModels.ChallengerViewModels.ChallengerViewModel
+@inject PharmaKursWork.Servises.UserServise userService;
+@{
+    var isCurrentUserChallengers = userService.isCurrentUserChallenger();
+    var user = userService.getCurrentUser();
+}
+@if (!isCurrentUserChallengers)
+{
+    <div class="container">
+        <form asp-action="AddChallenger" asp-controller="Challenger">
+            <input type="hidden" asp-for="ChallengerModel.Id" value="@user.Id" />
+            <div class="mb-3 row align-items-center">
+                <div class="col-auto">
+                    <label for="FirstName" class="col-form-label">@Html.DisplayNameFor(_ => Model.ChallengerModel.FirstName)</label>
+                </div>
+                <div class="col-auto flex-grow-1">
+                    <input asp-for="ChallengerModel.FirstName" class="form-control" id="FirstName" required>
+                </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+                <div class="col-auto">
+                    <label for="LastName" class="col-form-label">@Html.DisplayNameFor(_ => Model.ChallengerModel.LastName)</label>
+                </div>
+                <div class="col-auto flex-grow-1">
+                    <input asp-for="ChallengerModel.LastName" class="form-control" id="LastName">
+                </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+                <div class="col-auto">
+                    <label for="Contraindications" class="col-form-label">@Html.DisplayNameFor(_ => Model.ChallengerModel.Contraindications)</label>
+                </div>
+                <div class="col-auto flex-grow-1">
+                    <input asp-for="ChallengerModel.Contraindications" class="form-control" id="Contraindications">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Додати</button>
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <div class="container"><h3>Ви вже зареєструвалися як випробувач</h3></div>
+}

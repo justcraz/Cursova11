@@ -1,0 +1,151 @@
+﻿@model PharmaKursWork.ViewModels.LaboratoryEmployeeViewModels.LaboratoryEmployeeViewModel;
+
+<div class="text-center">
+    <div class="modal-contaier">
+    </div>
+    <h2>Вчені</h2>
+    <button class="button btn-primary addbutton" data-action="@Url.Action("AddScientist", "LaboratoryEmployee")">
+        Додати вченого
+    </button>
+    
+    @if (Model.ScientistList.Count > 0)
+    {
+        
+        <table id="scient" class="table table-striped">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>@Html.DisplayNameFor(_ => Model.ScientistViewModel.FirstName)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.ScientistViewModel.LastName)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.ScientistViewModel.PhoneNumber)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.ScientistViewModel.Email)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.ScientistViewModel.Adress)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.ScientistViewModel.LaboratoryName)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.ScientistViewModel.DirectionDevelopment)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.ScientistViewModel.ResponsibleForDevice)</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var LabEmp in Model.ScientistList)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            <button class="ks-tablebuttons editButton" data-action="@Url.Action("EditScientist", "LaboratoryEmployee", new { id = LabEmp.Id })"><img src="icons/pencil-square.svg" /></button>
+                            <a class="ks-tablebuttons deleteButton" asp-action="DeleteScientist" asp-controller="LaboratoryEmployee" asp-route-id="@LabEmp.Id"><img src="icons/trash3-fill.svg" /></a>
+                        </td>
+                        <td class="align-middle">@LabEmp.FirstName</td>
+                        <td class="align-middle">@LabEmp.LastName</td>
+                        <td class="align-middle">@LabEmp.PhoneNumber</td>
+                        <td class="align-middle">@LabEmp.Email</td>
+                        <td class="align-middle">@LabEmp.Adress</td>
+                        <td class="align-middle">@LabEmp.LaboratoryName</td>
+                        <td class="align-middle">@LabEmp.DirectionDevelopment</td>
+                        <td class="align-middle">@LabEmp.ResponsibleForDevice</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="d-flex justify-content-center"><h3>Данних немає</h3></div>
+    }
+
+    <h2 class="pt-3">Тех персонал</h2>
+    <button class="addbutton button btn-primary" data-action="@Url.Action("AddTechStaff", "LaboratoryEmployee")">
+        Додати тех персонал
+    </button>
+    @if (Model.TechStaffList.Count > 0)
+    {
+        <table id="techStaf" class="table table-striped" >
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>@Html.DisplayNameFor(_ => Model.TechStaffViewModel.FirstName)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.TechStaffViewModel.LastName)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.TechStaffViewModel.PhoneNumber)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.TechStaffViewModel.Email)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.TechStaffViewModel.Adress)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.TechStaffViewModel.LaboratoryName)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.TechStaffViewModel.MaintainsDevice)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.TechStaffViewModel.HasYourInstruments)</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var LabEmp in Model.TechStaffList)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            <button class="ks-tablebuttons editButton1" data-action="@Url.Action("EditTechStaff", "LaboratoryEmployee", new { id = LabEmp.Id })"><img src="icons/pencil-square.svg" /></button>
+                            <a class="ks-tablebuttons deleteButton1" asp-action="DeleteTechStaff" asp-controller="LaboratoryEmployee" asp-route-id="@LabEmp.Id"><img src="icons/trash3-fill.svg" /></a>
+                        </td>
+                        <td class="align-middle">@LabEmp.FirstName</td>
+                        <td class="align-middle">@LabEmp.LastName</td>
+                        <td class="align-middle">@LabEmp.PhoneNumber</td>
+                        <td class="align-middle">@LabEmp.Email</td>
+                        <td class="align-middle">@LabEmp.Adress</td>
+                        <td class="align-middle">@LabEmp.LaboratoryName</td>
+                        <td class="align-middle">@LabEmp.MaintainsDevice</td>
+                        <td class="align-middle">@LabEmp.HasYourInstruments</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="d-flex justify-content-center"><h3>Данних немає</h3></div>
+    }
+</div>
+
+<script>
+    $(function () {
+        const addButtons = document.querySelectorAll(".addbutton");
+
+        const deleteButtons1 = document.querySelectorAll(".deleteButton");
+        deleteButtons1.forEach((button, index) => {
+            if ((index + 1) % 2 === 0) {
+                button.classList.add("ks-wbg");
+            }
+        })
+
+        const editButtons1 = document.querySelectorAll(".editButton");
+        editButtons1.forEach((button, index) => {
+            if ((index + 1) % 2 === 0) {
+                button.classList.add("ks-wbg");
+            }
+        });
+
+        const editButtons = document.querySelectorAll(".editButton");
+        $(editButtons).on('click', (event) => {
+            event.preventDefault();
+            $.get($(event.currentTarget).data("action"), (resp) => {
+                $(".modal-contaier").html(resp);
+                $('#idi').modal('show');
+            })
+        });
+
+        $(addButtons).on('click', (event) => {
+            event.preventDefault();
+            $.get($(event.currentTarget).data("action"), (resp) => {
+                $(".modal-contaier").html(resp);
+                $('#idi').modal('show');
+            })
+        });
+
+        const editButtons2 = document.querySelectorAll(".editButton1");
+        editButtons2.forEach((button, index) => {
+            if ((index + 1) % 2 === 0) {
+                button.classList.add("ks-wbg");
+            }
+        });
+
+        const deleteButtons2 = document.querySelectorAll(".deleteButton1");
+        deleteButtons2.forEach((button, index) => {
+            if ((index + 1) % 2 === 0) {
+                button.classList.add("ks-wbg");
+            }
+        })
+
+    });
+</script>

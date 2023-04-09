@@ -1,0 +1,60 @@
+﻿@model PharmaKursWork.ViewModels.ChallengeViewModels.AddChallengeViewModel;
+@{
+    Layout = null;
+}
+
+<div id="idi" class="modal fade" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Додати випробування</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddChallenge" asp-controller="Challenge">
+                    <input type="hidden" asp-for="AddChallengeModal.Id" />
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="Name" class="col-form-label">@Html.DisplayNameFor(_ => Model.AddChallengeModal.Name)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="AddChallengeModal.Name" class="form-control" id="Name" required>
+                            <span asp-validation-for="AddChallengeModal.Name"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="lab" class="form-label">@Html.DisplayNameFor(_ => Model.AddChallengeModal.ScientistId)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <select class="form-control" asp-for="AddChallengeModal.ScientistId" asp-items="Model.ScientistSelectList" required></select>
+                            <span asp-validation-for="AddChallengeModal.ScientistId"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="unitMesuare" class="form-label">@Html.DisplayNameFor(_ => Model.AddChallengeModal.TechStaffId)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <select class="form-control" asp-for="AddChallengeModal.TechStaffId" asp-items="Model.TechStaffSelectList" required></select>
+                            <span asp-validation-for="AddChallengeModal.TechStaffId"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="commodityGroup" class="form-label">@Html.DisplayNameFor(_ => Model.AddChallengeModal.MedId)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <select class="form-control" asp-for="AddChallengeModal.MedId" asp-items="Model.MedSelectList" required></select>
+                            <span asp-validation-for="AddChallengeModal.MedId"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                        <button type="submit" class="btn btn-primary">Додати</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

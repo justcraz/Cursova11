@@ -1,0 +1,25 @@
+﻿@model PharmaKursWork.ViewModels.AccountViewModels.RegisterViewModel;
+<div class="ks-loginpage container border-dark position-absolute">
+    <div class="d-flex justify-content-center align-items-center">
+        <form asp-controller="Account" asp-action="Register" method="post" class="ks-loginform">
+            <div class="form-group m-4">
+                <label for="username">Логін</label>
+                <input asp-for="Username" class="form-control" id="username" placeholder="Введіть логін" />
+                <span asp-validation-for="Username"></span>
+            </div>
+            <div class="form-group m-4">
+                <label for="password">Пароль</label>
+                <input asp-for="Password" type="password" class="form-control" id="password" placeholder="Введіте пароль" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group m-4">
+                <label for="ConfPassword">Підтвердження пароля</label>
+                <input asp-for="ConfirmPassword" type="password" class="form-control" id="ConfPassword" placeholder="Введіть пароль" />
+                <span asp-validation-for="ConfirmPassword"></span>
+            </div>
+            <div class="d-flex justify-content-center mb-2">
+                <button type="submit" class="btn btn-primary">Увійти</button>
+            </div>
+        </form>
+    </div>
+</div>

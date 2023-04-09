@@ -1,0 +1,40 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.ks-loginpage {
+    top: 40%;
+}
+.ks-loginform {
+    border: 3px solid #858585;
+    border-radius: 3px;
+}
+.ks-tablebuttons {
+    border: 0px;
+    width: 40px;
+    height: 40px;
+}
+.ks-addbutton {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+}
+
+.ks-wbg {
+    background: white;
+}

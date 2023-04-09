@@ -1,0 +1,88 @@
+﻿@model PharmaKursWork.ViewModels.LaboratoryEmployeeViewModels.EditTechStaffViewModel;
+@{
+    Layout = null;
+}
+
+<div id="idi" class="modal fade" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Змінити тех персонал</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="EditTechStaff" asp-controller="LaboratoryEmployee">
+                    <input type="hidden" asp-for="LaboratoryEmployeeModel.Id" />
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="FirstName" class="col-form-label">@Html.DisplayNameFor(_ => Model.LaboratoryEmployeeModel.FirstName)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="LaboratoryEmployeeModel.FirstName" class="form-control" id="FirstName" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="LastName" class="col-form-label">@Html.DisplayNameFor(_ => Model.LaboratoryEmployeeModel.LastName)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="LaboratoryEmployeeModel.LastName" class="form-control" id="LastName" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="PhoneNumber" class="col-form-label">@Html.DisplayNameFor(_ => Model.LaboratoryEmployeeModel.PhoneNumber)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="LaboratoryEmployeeModel.PhoneNumber" class="form-control" id="PhoneNumber" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="Email" class="col-form-label">@Html.DisplayNameFor(_ => Model.LaboratoryEmployeeModel.Email)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="LaboratoryEmployeeModel.Email" class="form-control" id="Email" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="Adress" class="col-form-label">@Html.DisplayNameFor(_ => Model.LaboratoryEmployeeModel.Adress)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="LaboratoryEmployeeModel.Adress" class="form-control" id="Adress" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="commodityGroup" class="form-label">@Html.DisplayNameFor(_ => Model.LaboratoryEmployeeModel.LabratoryId)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <select class="form-control" asp-for="LaboratoryEmployeeModel.LabratoryId" asp-items="Model.LaboratorySelectList" required></select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="ResponsibleForDevice" class="col-form-label">@Html.DisplayNameFor(_ => Model.TechStaffModel.HasYourInstruments)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="TechStaffModel.HasYourInstruments" class="form-control" id="ResponsibleForDevice" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="DirectionDevelopment" class="col-form-label">@Html.DisplayNameFor(_ => Model.TechStaffModel.MaintainsDevice)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="TechStaffModel.MaintainsDevice" class="form-control" id="DirectionDevelopment" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                        <button type="submit" class="btn btn-primary">Змінити</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

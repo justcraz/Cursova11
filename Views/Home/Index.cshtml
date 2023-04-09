@@ -1,0 +1,51 @@
+﻿@inject PharmaKursWork.Servises.UserServise userService;
+@{
+    var isCurrentUserAdmin = userService.isCurrentUserAdmin();
+}
+
+<div class="text-center">
+
+    <div class="card">
+        <h4>Панель користувача</h4>
+        <div class="collapse d-sm-inline-flex justify-content-between">
+            <ul class="d-flex navbar-nav flex-row flex-grow-1">
+                <li class="nav-item p-3">
+                    <a class="border-primary border border-2 p-1 nav-link text-dark" asp-controller="Challenge" asp-action="Index">Випробування</a>
+                </li>
+                <li class="nav-item p-3">
+                    <a class="border-primary border border-2 p-1 nav-link text-dark" asp-controller="Challenger" asp-action="AddChallenger">Стати випробувачем</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    @if (isCurrentUserAdmin)
+    {
+        <div class="card mt-5">
+            <h4>Адмін панель</h4>
+            <div class="collapse d-sm-inline-flex justify-content-between">
+                <ul class="d-flex navbar-nav flex-row flex-grow-1">
+                    <li class="nav-item p-3">
+                        <a class="border-primary border border-2 p-1 nav-link text-dark" asp-controller="Challenger" asp-action="Index">Випробовувачі</a>
+                    </li>
+                    <li class="nav-item p-3">
+                        <a class="border-primary border border-2 p-1 nav-link text-dark" asp-controller="Unit" asp-action="Index">Одиниця виміру</a>
+                    </li>
+                    <li class="nav-item p-3">
+                        <a class="border-primary border border-2 p-1 nav-link text-dark" asp-controller="CommodityGroup" asp-action="Index">Товарна група</a>
+                    </li>
+                    <li class="nav-item p-3">
+                        <a class="border-primary border border-2 p-1 nav-link text-dark" asp-controller="Laboratories" asp-action="Index">Лабораторія</a>
+                    </li>
+                    <li class="nav-item p-3">
+                        <a class="border-primary border border-2 p-1 nav-link text-dark" asp-controller="Med" asp-action="Index">Ліки</a>
+                    </li>
+                    <li class="nav-item p-3">
+                        <a class="border-primary border border-2 p-1 nav-link text-dark" asp-controller="LaboratoryEmployee" asp-action="Index">Додати вченого чи тех персонал</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    }
+
+</div>

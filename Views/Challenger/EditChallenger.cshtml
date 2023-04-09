@@ -1,0 +1,60 @@
+﻿@model PharmaKursWork.ViewModels.ChallengerViewModels.ChallengerViewModel;
+@{
+    Layout = null;
+}
+
+<div id="idi" class="modal fade" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Змінити випробувача</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="EditChallenger" asp-controller="Challenger">
+                    <input type="hidden" asp-for="ChallengerModel.Id" />
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="Name" class="col-form-label">@Html.DisplayNameFor(_ => Model.ChallengerModel.FirstName)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="ChallengerModel.FirstName" class="form-control" id="Name" required>
+                            <span asp-validation-for="ChallengerModel.FirstName"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="Name" class="col-form-label">@Html.DisplayNameFor(_ => Model.ChallengerModel.LastName)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="ChallengerModel.LastName" class="form-control" id="Name" required>
+                            <span asp-validation-for="ChallengerModel.LastName"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="Name" class="col-form-label">@Html.DisplayNameFor(_ => Model.ChallengerModel.Contraindications)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="ChallengerModel.Contraindications" class="form-control" id="Name" required>
+                            <span asp-validation-for="ChallengerModel.Contraindications"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="commodityGroup" class="form-label">@Html.DisplayNameFor(_ => Model.ChallengerModel.ChallengeName)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <select class="form-control" asp-for="ChallengerModel.ChallengeId" asp-items="Model.ChallengeSelectList" required></select>
+                            <span asp-validation-for="ChallengerModel.ChallengeId"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                        <button type="submit" class="btn btn-primary">Змінити</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

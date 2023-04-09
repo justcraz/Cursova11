@@ -1,0 +1,40 @@
+﻿@model PharmaKursWork.ViewModels.UnitViewModels.EditUnitModalViewModel;
+@{
+    Layout = null;
+}
+
+<div id="idi" class="modal fade" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Змінити одиницю виміру</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="EditUnit" asp-controller="Unit">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="Name" class="col-form-label">@Html.DisplayNameFor(_ => Model.Name)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="Name" class="form-control" id="Name" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="startExp" class="form-label">@Html.DisplayNameFor(_ => Model.Desc)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="Desc" class="form-control" id="startExp" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                        <button type="submit" class="btn btn-primary">Змінити</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

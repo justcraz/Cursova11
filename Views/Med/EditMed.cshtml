@@ -1,0 +1,64 @@
+﻿@model PharmaKursWork.ViewModels.MedViewModels.EditMedModalViewModel;
+@{
+    Layout = null;
+}
+
+<div id="idi" class="modal fade" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Змінити ліки</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="EditMed" asp-controller="Med">
+                    <input type="hidden" asp-for="EditMedModel.Id" />
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="Name" class="col-form-label">@Html.DisplayNameFor(_ => Model.EditMedModel.Name)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input asp-for="EditMedModel.Name" class="form-control" id="Name" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="expenses" class="form-label">@Html.DisplayNameFor(_ => Model.EditMedModel.Expenses)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <input type="number" asp-for="EditMedModel.Expenses" class="form-control" id="expenses" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="lab" class="form-label">@Html.DisplayNameFor(_ => Model.EditMedModel.LabratoryId)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <select class="form-control" asp-for="EditMedModel.LabratoryId" asp-items="Model.LaboratoryList" required></select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="unitMesuare" class="form-label">@Html.DisplayNameFor(_ => Model.EditMedModel.UnitMeasureId)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <select class="form-control" asp-for="EditMedModel.UnitMeasureId" asp-items="Model.UnitMeasuresList" required></select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-auto">
+                            <label for="commodityGroup" class="form-label">@Html.DisplayNameFor(_ => Model.EditMedModel.CommodityGroupId)</label>
+                        </div>
+                        <div class="col-auto flex-grow-1">
+                            <select class="form-control" asp-for="EditMedModel.CommodityGroupId" asp-items="Model.CommodityGroupsList" required></select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                        <button type="submit" class="btn btn-primary">Змінити</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

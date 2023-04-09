@@ -1,0 +1,127 @@
+﻿@model PharmaKursWork.ViewModels.MedViewModels.MedViewModel
+@inject PharmaKursWork.Servises.UserServise userService;
+@{
+    var isCurrentUserAdmin = userService.isCurrentUserAdmin();
+}
+
+<div class="text-center">
+    <div>
+        <form asp-action="Index" asp-controller="Med" method="get">
+            <div class="mb-3 row align-items-center">
+                <div class="col-auto">
+                    <label for="MedName" class="col-form-label">@Html.DisplayNameFor(_ => Model.FilterViewModel.Name)</label>
+                </div>
+                <div class="col-auto flex-grow-1">
+                    <input asp-for="FilterViewModel.Name" class="form-control" id="MedName">
+                </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+                <div class="col-auto">
+                    <label for="Expenses" class="col-form-label">@Html.DisplayNameFor(_ => Model.FilterViewModel.MinExpenses)</label>
+                </div>
+                <div class="col-auto flex-grow-1">
+                    <input asp-for="FilterViewModel.MinExpenses" class="form-control" id="Expenses">
+                </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+                
+                
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Пошук</button>
+        </form>
+        <a class="btn btn-primary mt-2" asp-action="Index" asp-controller="Med">Зкинути</a>
+    </div>
+    <!-- Button trigger modal -->
+    @if (isCurrentUserAdmin)
+    {
+        <button type="button"
+            class="btn btn-primary ks-addbutton rounded-circle d-flex p-3 addButton"
+            data-action="@Url.Action("AddMed", "Med")">
+            <img style="width: 40px; height: 40px" src="icons/plus.svg" />
+        </button>
+    }
+    <div>
+        
+    </div>
+    <div class="modal-contaier">
+        
+    </div>
+    @if (Model.List.Count > 0)
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>@Html.DisplayNameFor(_ => Model.MedCustomViewModel.Name)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.MedCustomViewModel.StartExploring)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.MedCustomViewModel.Expenses)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.MedCustomViewModel.LabratoryName)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.MedCustomViewModel.UnitMeasureName)</td>
+                    <td>@Html.DisplayNameFor(_ => Model.MedCustomViewModel.CommodityName)</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var med in Model.List)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @if (isCurrentUserAdmin)
+                            {
+                                <button class="ks-tablebuttons editButton" data-action="@Url.Action("EditMed", "Med", new { id = med.Id })"><img src="icons/pencil-square.svg" /></button>
+                                <a class="ks-tablebuttons deleteButton" asp-action="DeleteMed" asp-controller="Med" asp-route-id="@med.Id"><img src="icons/trash3-fill.svg" /></a>
+                            }
+                        </td>
+                        <td class="align-middle">@med.Name</td>
+                        <td class="align-middle">@med.StartExploring</td>
+                        <td class="align-middle">@med.Expenses</td>
+                        <td class="align-middle">@med.LabratoryName</td>
+                        <td class="align-middle">@med.UnitMeasureName</td>
+                        <td class="align-middle">@med.CommodityName</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="d-flex justify-content-center"><h3>Данних немає</h3></div>
+    }
+</div>
+
+<script>
+    $(function () {
+        const addButtons = document.querySelectorAll(".ks-addbutton");
+
+        const deleteButtons = document.querySelectorAll(".deleteButton");
+        deleteButtons.forEach((button, index) => {
+            if ((index + 1) % 2 === 0) {
+                button.classList.add("ks-wbg");
+            }
+        })
+
+        const editButtons = document.querySelectorAll(".editButton");
+        editButtons.forEach((button, index) => {
+            if ((index + 1) % 2 === 0) {
+                button.classList.add("ks-wbg");
+            }
+        });
+
+        $(editButtons).on('click', (event) => {
+            event.preventDefault();
+            $.get($(event.currentTarget).data("action"), (resp) => {
+                $(".modal-contaier").html(resp);
+                $('#idi').modal('show');
+            })
+        });
+
+        $(addButtons).on('click', (event) => {
+            event.preventDefault();
+            $.get($(event.currentTarget).data("action"), (resp) => {
+                $(".modal-contaier").html(resp);
+                $('#idi').modal('show');
+            })
+        });
+    });
+</script>
